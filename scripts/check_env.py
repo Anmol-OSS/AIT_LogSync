@@ -66,6 +66,26 @@ def check_tool(cmd, minimum_major=None):
     return check
 
 
+def check_ollama():
+    """Ollama's Windows installer does not add itself to PATH; also look in its
+    install folder, then ask the local server whether llama3:8b is present."""
+    import json
+    import os
+    import urllib.request
+    exe = shutil.which("ollama") or next((p for p in [os.path.expandvars(r"%LOCALAPPDATA%\Programs\Ollama\ollama.exe")]
+                                          if os.path.exists(p)), None)
+    try:
+        with urllib.request.urlopen("http://127.0.0.1:11434/api/tags", timeout=2) as r:
+            models = [m["name"] for m in json.loads(r.read()).get("models", [])]
+        has = any(m.startswith("llama3") for m in models)
+        return has, "server running, models: %s" % (", ".join(models) or "none - run: ollama pull llama3:8b")
+    except OSError:
+        pass
+    if exe:
+        return False, "installed at %s but not running - start the Ollama app" % exe
+    return False, "not installed (drafting falls back to Drain)"
+
+
 def check_wasm_target():
     rustup = shutil.which("rustup")
     if not rustup:
@@ -87,7 +107,7 @@ CHECKS = [
     ("Rust (cargo)", "M5b WASM runtime", check_tool(["cargo", "--version"])),
     ("Rust wasm32 target", "M5b WASM runtime", check_wasm_target),
     ("Docker", "M5c Kafka pipeline", check_tool(["docker", "--version"])),
-    ("Ollama", "M5d LLM parser drafts", check_tool(["ollama", "--version"])),
+    ("Ollama + llama3", "LLM parser drafts", check_ollama),
 ]
 
 

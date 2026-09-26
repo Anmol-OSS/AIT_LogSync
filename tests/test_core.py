@@ -158,7 +158,7 @@ def test_unknown_device_is_unparsed():
     ("fortigate", lambda b: b + b" X-DBG:9f", "not explained"),
     ("suricata", lambda b: b[:-5], "structure did not match"),
     ("checkpoint_cef", lambda b: b.replace(b"|Log|", b"~Log~"), "structure did not match"),
-    ("panos", lambda b: b.replace(b"192.168.4.11", b"192.168.4.311"), "declared transform failed"),
+    ("panos", lambda b: b.replace(b"192.168.4.11", b"192.168.4.311"), "declared normalization failed"),
     ("cisco_asa", lambda b: b + b" trailing", "not explained"),
 ])
 def test_damaged_lines_are_blocked_never_half_normalized(name, mutate, reason):
@@ -180,21 +180,21 @@ def test_registry_signs_verifies_and_hot_reloads(tmp_path):
     reg = Registry(tmp_path / "packs", Signer(tmp_path / "k.pem"))
     assert reg.bootstrap(REPO / "packs") == 6
     assert len(reg.active()) == 6
-    fg = reg.get("fortigate", "1.3.0")
+    fg = reg.get("fortigate", "1.4.0")
     assert reg.is_signed(fg)
 
-    newer = fg.text.replace("version: 1.3.0", "version: 1.4.0")
+    newer = fg.text.replace("version: 1.4.0", "version: 1.5.0")
     reg.add(newer)
-    assert [p.version for p in reg.active() if p.id == "fortigate"] == ["1.4.0"]
-    assert reg.get("fortigate", "1.3.0") is not None          # old version kept for verification
+    assert [p.version for p in reg.active() if p.id == "fortigate"] == ["1.5.0"]
+    assert reg.get("fortigate", "1.4.0") is not None          # old version kept for verification
     with pytest.raises(PackError):
         reg.add(newer)                                        # versions are immutable
 
-    path = tmp_path / "packs" / "fortigate@1.4.0.yaml"
+    path = tmp_path / "packs" / "fortigate@1.5.0.yaml"
     path.write_bytes(path.read_bytes().replace(b"accept: Allowed", b"accept: Blocked"))
     assert reg.reload_if_changed()
-    assert "fortigate@1.4.0.yaml" in reg.rejected             # tampered pack refused
-    assert [p.version for p in reg.active() if p.id == "fortigate"] == ["1.3.0"]
+    assert "fortigate@1.5.0.yaml" in reg.rejected             # tampered pack refused
+    assert [p.version for p in reg.active() if p.id == "fortigate"] == ["1.4.0"]
 
 
 # ---------------------------------------------------------------- processor + verification
@@ -234,3 +234,30 @@ def test_process_verify_tamper(proc):
 
     proc.evidence.archive.overwrite_byte(ref, pos, old)
     assert verify(good)["overall"] == "verified"
+
+
+# ---------------------------------------------------------------- typed checks (validate / exact_columns)
+def test_firmware_column_shift_is_blocked_not_mismapped():
+    raw = sample("panos")[0]
+    header, body = raw.split(b" 1,", 1)
+    cols = (b"1," + body).split(b",")
+    shifted = header + b" " + b",".join(cols[:12] + [b"new-firmware-field"] + cols[12:])  # vendor inserts a column
+    ev = process(shifted)
+    assert ev["status"] == "blocked" and "expected 40 columns, got 41" in ev["roundtrip"]["reason"]
+
+
+def test_malformed_value_in_typed_column_is_blocked():
+    ev = process(sample("panos")[0] + b" junk=3")                 # lands inside the last column
+    assert ev["status"] == "blocked" and "field sequence" in ev["roundtrip"]["reason"]
+
+
+def test_validator_patterns_must_compile():
+    with pytest.raises(PackError):
+        load_pack("id: x\nversion: 1\nformat: kv\nfingerprint: a\nvalidate: {a: '%{NOPE}'}\n")
+
+
+def test_truncated_message_missing_required_fields_is_blocked():
+    raw = sample("fortigate")[0]
+    cut = raw[:raw.index(b" sentbyte=")]                          # UDP syslog cut the tail off
+    ev = process(cut)
+    assert ev["status"] == "blocked" and "required fields" in ev["roundtrip"]["reason"]

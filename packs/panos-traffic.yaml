@@ -1,6 +1,6 @@
 # Palo Alto Networks PAN-OS - CSV TRAFFIC log over syslog.
 id: panos-traffic
-version: 1.1.0
+version: 1.2.0
 vendor: Palo Alto Networks
 product: PAN-OS
 family: PAN-OS
@@ -15,6 +15,18 @@ columns: [future_use_1, receive_time, serial, type, subtype, future_use_2, gener
           session_id, repeat_count, src_port, dst_port, nat_src_port, nat_dst_port, flags,
           protocol, action, bytes, bytes_sent, bytes_received, packets, start_time,
           elapsed, category, future_use_4, sequence]
+exact_columns: true            # a firmware that adds columns must not shift values silently
+validate:
+  receive_time: '\d{4}/\d\d/\d\d \d\d:\d\d:\d\d'
+  generated_time: '\d{4}/\d\d/\d\d \d\d:\d\d:\d\d'
+  type: 'TRAFFIC'
+  session_id: '%{INT}'
+  repeat_count: '%{INT}'
+  flags: '%{BASE16NUM}'
+  bytes: '%{INT}'
+  packets: '%{INT}'
+  elapsed: '%{INT}'
+  sequence: '%{INT}'
 map:
   time:                          {from: generated_time, transforms: [{strptime: "%Y/%m/%d %H:%M:%S"}, tz]}
   device.hostname:               host

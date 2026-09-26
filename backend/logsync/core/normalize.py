@@ -4,6 +4,7 @@ Every non-empty field the tokenizer captured ends up in the event: mapped to a
 UES field, or kept under unmapped.<name>. Nothing captured is dropped. If a
 declared transform fails the event is blocked, never silently half-normalized.
 """
+import re
 from dataclasses import dataclass
 
 from . import transforms
@@ -53,6 +54,21 @@ def normalize(pack: Pack, tok: TokenResult, raw: bytes, ctx: transforms.Context)
                            "transforms": chain.labels})
 
     try:
+        if pack.exact_columns is not None:
+            names = set(pack.spec["columns"])
+            cols = sum(1 for name, *_ in fields if name in names or re.fullmatch(r"col\d+", name))
+            if cols != pack.exact_columns:
+                raise transforms.TransformError("expected %d columns, got %d (format changed?)"
+                                                % (pack.exact_columns, cols))
+        missing = [f for f in pack.required if f not in by_name]
+        if missing:
+            raise transforms.TransformError("required field%s %s missing (truncated message?)"
+                                            % ("s" if len(missing) > 1 else "", ", ".join(missing[:4])))
+        for fname, (rx, shown) in pack.validators.items():
+            hit = by_name.get(fname)
+            if hit and not rx.fullmatch(raw[hit[0]:hit[1]]):
+                raise transforms.TransformError("field %s = %r does not match declared %s"
+                                                % (fname, raw[hit[0]:hit[1]].decode("utf-8", "replace")[:40], shown))
         for fm in pack.maps:
             for src in fm.sources:
                 hit = by_name.get(src)

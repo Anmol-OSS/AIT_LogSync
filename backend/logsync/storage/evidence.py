@@ -48,6 +48,7 @@ class EvidenceStore:
         self.signer = Signer(settings.data_dir / "keys" / "log_ed25519.pem")
         self.tsa = LocalTSA(settings.data_dir / "tsa", enabled=settings.tsa == "openssl")
         self._last_seal = time.monotonic()
+        self._stamp_ok: dict[tuple[int, str], bool] = {}   # (tree size, signature) -> RFC 3161 token valid
 
     # ---------------------------------------------------------------- write path
     def record(self, event_id: str, received_at: str, raw: bytes) -> tuple[str, str, int]:
@@ -115,7 +116,10 @@ class EvidenceStore:
             return False, "recomputed leaf hash does not reach signed root"
         stamp = ""
         if head.rfc3161:
-            stamp = ", RFC 3161 timestamp valid" if self.tsa.verify(head.message(), head.rfc3161) \
-                else ", RFC 3161 timestamp INVALID"
+            # a tree head's token never changes: verify it once (openssl), not on every event
+            key = (head.tree_size, head.signature)
+            if key not in self._stamp_ok:
+                self._stamp_ok[key] = self.tsa.verify(head.message(), head.rfc3161)
+            stamp = ", RFC 3161 timestamp valid" if self._stamp_ok[key] else ", RFC 3161 timestamp INVALID"
         return True, "leaf %d proven in signed tree of %d (%d-hash path)%s" % (
             leaf_index, head.tree_size, len(path), stamp)

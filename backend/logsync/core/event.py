@@ -52,7 +52,7 @@ def build_event(*, event_id: str, received_at: str, source_host: str, raw: bytes
     norm = normalize(pack, tok, raw, transforms.Context(received_at, default_tz))
     if norm.error:
         event["status"] = "blocked"
-        rt.update(unexplained=[], reason="declared transform failed: %s" % norm.error)
+        rt.update(unexplained=[], reason="declared normalization failed: %s" % norm.error)
         return event
 
     event.update(status="accepted", ues=norm.ues, provenance=norm.provenance)

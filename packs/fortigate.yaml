@@ -1,6 +1,6 @@
 # Fortinet FortiGate - key=value traffic logs, <PRI>-only syslog header.
 id: fortigate
-version: 1.3.0
+version: 1.4.0
 vendor: Fortinet
 product: FortiGate
 family: FortiGate
@@ -9,6 +9,11 @@ priority: 10
 fingerprint: '^<\d{1,3}>date=\S+ time=\S+ devname='
 format: kv
 header: '<%{INT:pri}>'
+required: [date, time, devname, eventtime, srcip, srcport, dstip, dstport, proto, action,
+           sentbyte, rcvdbyte, sentpkt, rcvdpkt]
+validate:
+  sentpkt: '%{INT}'
+  rcvdpkt: '%{INT}'
 map:
   time:                          {from: eventtime, transforms: [epoch_ns, tz]}
   device.hostname:               devname

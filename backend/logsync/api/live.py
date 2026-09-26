@@ -67,7 +67,7 @@ class LiveService:
         rt_blocked = 0
         for r in c.execute("SELECT doc FROM events WHERE status = 'blocked' ORDER BY seq DESC LIMIT 2000"):
             reason = json.loads(r["doc"])["roundtrip"].get("reason") or ""
-            rt_blocked += "transform" not in reason
+            rt_blocked += "declared normalization" not in reason
         packs = {p.source_name: p for p in self.registry.active()}
         sources = []
         for r in c.execute("SELECT source_name, COUNT(*) n, SUM(status='accepted') ok, "
