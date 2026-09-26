@@ -1,0 +1,27 @@
+# Check Point Log Exporter - LEEF 1.0 (tab-delimited) over syslog.
+id: checkpoint-leef
+version: 1.0.0
+vendor: Check Point
+product: VPN-1 & FireWall-1
+family: Check Point
+source_name: checkpoint_leef
+priority: 10
+fingerprint: '^<\d{1,3}>\w{3} [ \d]\d [\d:]{8} \S+ LEEF:1\.0\|Check Point\|'
+format: leef
+header: '<%{INT:pri}>%{SYSLOGTIMESTAMP:ts} %{HOSTNAME:host} '
+map:
+  time:                          {from: devTime, transforms: [{strptime: "%b %d %Y %H:%M:%S"}, tz]}
+  device.hostname:               host
+  src_endpoint.ip:               {from: src, transforms: [ip]}
+  src_endpoint.port:             {from: srcPort, transforms: [int]}
+  dst_endpoint.ip:               {from: dst, transforms: [ip]}
+  dst_endpoint.port:             {from: dstPort, transforms: [int]}
+  connection_info.protocol_name: {from: proto, transforms: [lower]}
+  disposition:                   {from: action, transforms: [{lookup: {Accept: Allowed, Drop: Blocked, Reject: Blocked}}]}
+  severity_id:                   {from: action, transforms: [{lookup: {Accept: 1, "*": 3}}]}
+constants:
+  class_uid: 4001
+  class_name: Network Activity
+  category_uid: 4
+  metadata.product.vendor_name: Check Point
+  metadata.product.name: VPN-1 & FireWall-1

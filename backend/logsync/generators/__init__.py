@@ -7,7 +7,7 @@ import random
 from dataclasses import dataclass
 from typing import Callable
 
-from . import asa, checkpoint, fortigate, panos, suricata
+from . import asa, checkpoint, fortigate, juniper, panos, suricata
 
 
 @dataclass(frozen=True)
@@ -16,6 +16,7 @@ class Source:
     family: str        # vendor / product family
     fmt: str           # wire format of the message body
     generate: Callable
+    has_pack: bool = True  # False: no built-in parser pack (the "unknown device")
 
 
 SOURCES = {s.name: s for s in [
@@ -25,6 +26,7 @@ SOURCES = {s.name: s for s in [
     Source("checkpoint_cef", "Check Point", "cef", checkpoint.generate_cef),
     Source("checkpoint_leef", "Check Point", "leef", checkpoint.generate_leef),
     Source("suricata", "Suricata IDS", "json", suricata.generate),
+    Source("juniper_srx", "Juniper SRX", "syslog", juniper.generate, has_pack=False),
 ]}
 
 

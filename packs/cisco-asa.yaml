@@ -1,0 +1,36 @@
+# Cisco ASA firewall - RFC 3164 syslog, one pattern per message ID.
+id: cisco-asa
+version: 2.0.1
+vendor: Cisco
+product: ASA
+family: Cisco ASA
+source_name: cisco_asa
+priority: 10
+fingerprint: '^<\d{1,3}>\w{3} [ \d]\d \d\d:\d\d:\d\d \S+ %ASA-'
+format: regex
+header: '<%{INT:pri}>%{SYSLOGTIMESTAMP:ts} %{HOSTNAME:host} '
+patterns:
+  - '%ASA-%{INT:sev}-%{INT:msgid}: access-list %{NOTSPACE:acl} %{WORD:verdict} %{WORD:proto} %{WORD:src_zone}/%{IP:src_ip}\(%{INT:src_port}\) -> %{WORD:dst_zone}/%{IP:dst_ip}\(%{INT:dst_port}\) hit-cnt %{INT:hit_count} first hit \[%{BASE16NUM:hash1}, %{BASE16NUM:hash2}\]'
+  - '%ASA-%{INT:sev}-%{INT:msgid}: %{WORD:verdict} %{WORD:proto} src %{WORD:src_zone}:%{IP:src_ip}/%{INT:src_port} dst %{WORD:dst_zone}:%{IP:dst_ip}/%{INT:dst_port} by access-group "%{DATA:acl}" \[%{BASE16NUM:hash1}, %{BASE16NUM:hash2}\]'
+  - '%ASA-%{INT:sev}-%{INT:msgid}: Built %{WORD:direction} %{WORD:proto} connection %{INT:conn_id} for %{WORD:dst_zone}:%{IP:dst_ip}/%{INT:dst_port} \(%{IP:dst_ip_mapped}/%{INT:dst_port_mapped}\) to %{WORD:src_zone}:%{IP:src_ip}/%{INT:src_port} \(%{IP:src_ip_mapped}/%{INT:src_port_mapped}\)'
+map:
+  time:                          {from: ts, transforms: [rfc3164, tz]}
+  device.hostname:               host
+  metadata.event_code:           msgid
+  src_endpoint.ip:               {from: src_ip, transforms: [ip]}
+  src_endpoint.port:             {from: src_port, transforms: [int]}
+  dst_endpoint.ip:               {from: dst_ip, transforms: [ip]}
+  dst_endpoint.port:             {from: dst_port, transforms: [int]}
+  connection_info.protocol_name: {from: proto, transforms: [lower]}
+  disposition:
+    from: [verdict, msgid]
+    transforms: [{lookup: {permitted: Allowed, denied: Blocked, Deny: Blocked, "302013": Allowed}}]
+  severity_id:
+    from: sev
+    transforms: [{lookup: {"0": 5, "1": 5, "2": 4, "3": 4, "4": 3, "5": 2, "6": 1, "7": 1}}]
+constants:
+  class_uid: 4001
+  class_name: Network Activity
+  category_uid: 4
+  metadata.product.vendor_name: Cisco
+  metadata.product.name: ASA

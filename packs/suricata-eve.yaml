@@ -1,0 +1,29 @@
+# Suricata IDS - EVE JSON forwarded over syslog.
+id: suricata-eve
+version: 1.2.0
+vendor: OISF
+product: Suricata
+family: Suricata IDS
+source_name: suricata
+priority: 10
+fingerprint: '^<\d{1,3}>\w{3} [ \d]\d [\d:]{8} \S+ suricata\[\d+\]: \{'
+format: json
+header: '<%{INT:pri}>%{SYSLOGTIMESTAMP:ts} %{HOSTNAME:host} suricata\[%{INT:pid}\]: '
+map:
+  time:                          {from: timestamp, transforms: [iso8601, tz]}
+  device.hostname:               host
+  src_endpoint.ip:               {from: src_ip, transforms: [ip]}
+  src_endpoint.port:             {from: src_port, transforms: [int]}
+  dst_endpoint.ip:               {from: dest_ip, transforms: [ip]}
+  dst_endpoint.port:             {from: dest_port, transforms: [int]}
+  connection_info.protocol_name: {from: proto, transforms: [lower]}
+  disposition:                   {from: alert.action, transforms: [{lookup: {allowed: Allowed, blocked: Blocked}}]}
+  severity_id:                   {from: alert.severity, transforms: [{lookup: {"1": 4, "2": 3, "3": 2, "*": 1}}]}
+  metadata.event_code:           alert.signature_id
+  finding.title:                 alert.signature
+constants:
+  class_uid: 4001
+  class_name: Network Activity
+  category_uid: 4
+  metadata.product.vendor_name: OISF
+  metadata.product.name: Suricata
