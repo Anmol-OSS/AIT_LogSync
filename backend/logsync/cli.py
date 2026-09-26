@@ -1,6 +1,7 @@
 """Command-line entry point:  logsync <command>  (or  python -m logsync <command>).
 
     serve    everything in one process: syslog ingest + worker + API + UI (memory bus)
+    demo     serve with fresh data and background device traffic (for the demo video)
     ingest   syslog listener publishing to Kafka           } the same pipeline split into
     worker   Kafka consumer: archive, parse, gate, index    } services (docker-compose)
     api      REST API + UI over the shared data directory   }
@@ -72,6 +73,41 @@ def cmd_serve(args) -> int:
         ingest.stop()
         worker.stop()
     return 0
+
+
+def cmd_demo(args) -> int:
+    """Fresh demo data, `serve`, and background traffic: one command for the video."""
+    import shutil
+    import time
+
+    from .generators import generate_lines
+    from .pipeline.replay import replay
+
+    data = Path(args.data)
+    if data.exists() and not args.keep:
+        shutil.rmtree(data)
+    os.environ["LOGSYNC_DATA"] = str(data)
+
+    def traffic():
+        time.sleep(4)                                  # let the listeners start
+        target = "127.0.0.1:%d" % args.syslog_port
+        threading.Thread(target=replay, args=(target,), daemon=True,
+                         kwargs=dict(rate=args.rate, count=0, quiet=True)).start()
+        # a few damaged lines so the round-trip gate has something to block
+        import socket
+        for i, ln in enumerate(generate_lines("fortigate", 12, seed=404)):
+            time.sleep(5)
+            bad = (ln + " X-DBG:%02x" % i).encode()
+            try:
+                with socket.create_connection(("127.0.0.1", args.syslog_port)) as s:
+                    s.sendall(b"%d %s" % (len(bad), bad))
+            except OSError:
+                return
+
+    threading.Thread(target=traffic, daemon=True).start()
+    print("LogSync demo: fresh data in %s, replaying ~%d events/s from 7 device types" % (data, args.rate))
+    print("  open http://%s:%d  - walkthrough: docs/DEMO.md" % (args.host, args.port))
+    return cmd_serve(args)
 
 
 def cmd_ingest(args) -> int:
@@ -168,6 +204,14 @@ def main(argv=None) -> int:
     s.add_argument("--port", type=int, default=8000)
     s.add_argument("--syslog-port", type=int, default=5514)
 
+    s = sub.add_parser("demo", help="fresh demo data + serve + background device traffic")
+    s.add_argument("--host", default="127.0.0.1")
+    s.add_argument("--port", type=int, default=8000)
+    s.add_argument("--syslog-port", type=int, default=5514)
+    s.add_argument("--rate", type=float, default=120, help="replayed events per second")
+    s.add_argument("--data", default="demo-data", help="demo data directory (wiped on start)")
+    s.add_argument("--keep", action="store_true", help="keep existing demo data")
+
     s = sub.add_parser("ingest", help="syslog listener -> Kafka")
     s.add_argument("--host", default="0.0.0.0")
     s.add_argument("--syslog-port", type=int, default=5514)
@@ -193,7 +237,7 @@ def main(argv=None) -> int:
     s.add_argument("--prove", type=int, default=0, help="line number to prove (default 0)")
 
     args = p.parse_args(argv)
-    return {"serve": cmd_serve, "ingest": cmd_ingest, "worker": cmd_worker, "api": cmd_api,
+    return {"serve": cmd_serve, "demo": cmd_demo, "ingest": cmd_ingest, "worker": cmd_worker, "api": cmd_api,
             "replay": cmd_replay, "archive": cmd_archive}[args.cmd](args)
 
 

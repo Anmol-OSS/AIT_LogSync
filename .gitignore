@@ -27,3 +27,6 @@ Thumbs.db
 
 # Frontend build output
 frontend/dist/
+
+# Demo data written by `logsync demo`
+demo-data/
