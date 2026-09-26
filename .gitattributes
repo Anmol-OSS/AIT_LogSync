@@ -1,0 +1,5 @@
+* text=auto
+
+# Sample logs are evidence: byte provenance depends on every byte staying
+# exactly as generated, so git must never convert their line endings.
+samples/** -text

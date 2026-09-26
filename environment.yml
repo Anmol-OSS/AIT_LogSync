@@ -1,0 +1,9 @@
+# Conda environment for LogSync ULPF.
+# Create with:  conda env create -f environment.yml
+name: logsync
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - pip
+  - pytest

@@ -1,0 +1,200 @@
+<166>Sep 25 09:00:00 fw01 %ASA-6-302013: Built outbound TCP connection 780069 for outside:1.1.1.1/22 (1.1.1.1/22) to inside:172.16.9.2/27830 (172.16.9.2/27830)
+<166>Sep 25 09:00:03 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/10.55.3.90(11465) -> outside/52.95.110.1(443) hit-cnt 154 first hit [0x7fea5a05, 0x0]
+<164>Sep 25 09:00:06 fw01 %ASA-4-106023: Deny tcp src outside:198.51.100.23/58840 dst inside:10.55.3.90/22 by access-group "outside_acl" [0x0, 0x0]
+<166>Sep 25 09:00:06 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/10.55.3.90(27521) -> outside/142.250.183.14(443) hit-cnt 226 first hit [0x090996b5, 0x0]
+<164>Sep 25 09:00:09 fw01 %ASA-4-106023: Deny tcp src outside:192.0.2.77/22661 dst inside:172.16.9.2/8443 by access-group "outside_acl" [0x0, 0x0]
+<166>Sep 25 09:00:12 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/192.168.4.11(65255) -> outside/8.8.8.8(8443) hit-cnt 28 first hit [0x469d3649, 0x0]
+<166>Sep 25 09:00:12 fw01 %ASA-6-106100: access-list outside_acl permitted udp inside/10.55.3.90(12806) -> outside/13.107.42.14(53) hit-cnt 263 first hit [0x12081546, 0x0]
+<166>Sep 25 09:00:15 fw01 %ASA-6-106100: access-list outside_acl permitted udp inside/10.2.1.7(4911) -> outside/1.1.1.1(53) hit-cnt 178 first hit [0x774cf982, 0x0]
+<166>Sep 25 09:00:18 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/192.168.4.11(12906) -> outside/52.95.110.1(22) hit-cnt 123 first hit [0xb22923a1, 0x0]
+<166>Sep 25 09:00:18 fw01 %ASA-6-302013: Built outbound TCP connection 280653 for outside:1.1.1.1/8443 (1.1.1.1/8443) to inside:10.55.3.90/37677 (10.55.3.90/37677)
+<166>Sep 25 09:00:21 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/10.20.30.40(25837) -> outside/13.107.42.14(8443) hit-cnt 104 first hit [0x6e90833f, 0x0]
+<164>Sep 25 09:00:24 fw01 %ASA-4-106100: access-list outside_acl denied udp inside/10.2.1.7(46400) -> outside/1.1.1.1(53) hit-cnt 200 first hit [0x41525ab6, 0x0]
+<166>Sep 25 09:00:24 fw01 %ASA-6-302013: Built outbound TCP connection 941044 for outside:142.250.183.14/22 (142.250.183.14/22) to inside:10.20.30.40/37964 (10.20.30.40/37964)
+<164>Sep 25 09:00:27 fw01 %ASA-4-106023: Deny tcp src outside:198.51.100.23/7313 dst inside:10.20.30.40/80 by access-group "outside_acl" [0x0, 0x0]
+<166>Sep 25 09:00:30 fw01 %ASA-6-302013: Built outbound TCP connection 778681 for outside:52.95.110.1/443 (52.95.110.1/443) to inside:10.2.1.7/10862 (10.2.1.7/10862)
+<166>Sep 25 09:00:30 fw01 %ASA-6-302013: Built outbound TCP connection 728071 for outside:1.1.1.1/53 (1.1.1.1/53) to inside:10.2.1.7/57688 (10.2.1.7/57688)
+<164>Sep 25 09:00:33 fw01 %ASA-4-106100: access-list outside_acl denied tcp inside/10.2.1.7(32400) -> outside/13.107.42.14(443) hit-cnt 249 first hit [0x033c6855, 0x0]
+<166>Sep 25 09:00:36 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/10.2.1.7(64344) -> outside/1.1.1.1(22) hit-cnt 213 first hit [0xfa0821bf, 0x0]
+<166>Sep 25 09:00:36 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/10.20.30.40(23911) -> outside/13.107.42.14(443) hit-cnt 256 first hit [0x0fcbc230, 0x0]
+<166>Sep 25 09:00:39 fw01 %ASA-6-302013: Built outbound TCP connection 484809 for outside:8.8.8.8/8443 (8.8.8.8/8443) to inside:10.20.30.40/17158 (10.20.30.40/17158)
+<164>Sep 25 09:00:42 fw01 %ASA-4-106023: Deny tcp src outside:198.51.100.23/25374 dst inside:10.2.1.7/22 by access-group "outside_acl" [0x0, 0x0]
+<166>Sep 25 09:00:42 fw01 %ASA-6-302013: Built outbound TCP connection 191356 for outside:8.8.8.8/22 (8.8.8.8/22) to inside:192.168.4.11/15693 (192.168.4.11/15693)
+<166>Sep 25 09:00:45 fw01 %ASA-6-302013: Built outbound TCP connection 855096 for outside:1.1.1.1/443 (1.1.1.1/443) to inside:10.20.30.40/11078 (10.20.30.40/11078)
+<164>Sep 25 09:00:48 fw01 %ASA-4-106100: access-list outside_acl denied tcp inside/192.168.4.11(48964) -> outside/13.107.42.14(443) hit-cnt 245 first hit [0x3db91a8c, 0x0]
+<164>Sep 25 09:00:48 fw01 %ASA-4-106023: Deny tcp src outside:198.51.100.23/53201 dst inside:192.168.4.11/8443 by access-group "outside_acl" [0x0, 0x0]
+<164>Sep 25 09:00:51 fw01 %ASA-4-106100: access-list outside_acl denied udp inside/192.168.4.11(57218) -> outside/1.1.1.1(53) hit-cnt 280 first hit [0xf69cdc62, 0x0]
+<164>Sep 25 09:00:54 fw01 %ASA-4-106023: Deny tcp src outside:198.51.100.23/45629 dst inside:10.20.30.40/80 by access-group "outside_acl" [0x0, 0x0]
+<164>Sep 25 09:00:54 fw01 %ASA-4-106023: Deny tcp src outside:192.0.2.77/46165 dst inside:10.2.1.7/22 by access-group "outside_acl" [0x0, 0x0]
+<166>Sep 25 09:00:57 fw01 %ASA-6-302013: Built outbound TCP connection 495900 for outside:52.95.110.1/22 (52.95.110.1/22) to inside:10.2.1.7/43182 (10.2.1.7/43182)
+<164>Sep 25 09:01:00 fw01 %ASA-4-106023: Deny tcp src outside:198.51.100.23/18316 dst inside:10.2.1.7/8443 by access-group "outside_acl" [0x0, 0x0]
+<166>Sep 25 09:01:00 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/10.55.3.90(56365) -> outside/1.1.1.1(80) hit-cnt 369 first hit [0x68a85d4a, 0x0]
+<164>Sep 25 09:01:03 fw01 %ASA-4-106023: Deny tcp src outside:198.51.100.23/32842 dst inside:192.168.4.11/443 by access-group "outside_acl" [0x0, 0x0]
+<166>Sep 25 09:01:06 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/172.16.9.2(4663) -> outside/8.8.8.8(22) hit-cnt 235 first hit [0x59aa2efa, 0x0]
+<164>Sep 25 09:01:06 fw01 %ASA-4-106023: Deny udp src outside:203.0.113.5/59096 dst inside:10.55.3.90/53 by access-group "outside_acl" [0x0, 0x0]
+<164>Sep 25 09:01:09 fw01 %ASA-4-106023: Deny tcp src outside:203.0.113.5/12351 dst inside:10.2.1.7/80 by access-group "outside_acl" [0x0, 0x0]
+<166>Sep 25 09:01:12 fw01 %ASA-6-302013: Built outbound TCP connection 119967 for outside:8.8.8.8/53 (8.8.8.8/53) to inside:172.16.9.2/60459 (172.16.9.2/60459)
+<166>Sep 25 09:01:12 fw01 %ASA-6-302013: Built outbound TCP connection 692572 for outside:8.8.8.8/53 (8.8.8.8/53) to inside:10.20.30.40/9627 (10.20.30.40/9627)
+<166>Sep 25 09:01:15 fw01 %ASA-6-302013: Built outbound TCP connection 343317 for outside:142.250.183.14/8443 (142.250.183.14/8443) to inside:10.20.30.40/18621 (10.20.30.40/18621)
+<164>Sep 25 09:01:18 fw01 %ASA-4-106023: Deny udp src outside:198.51.100.23/29481 dst inside:10.20.30.40/53 by access-group "outside_acl" [0x0, 0x0]
+<164>Sep 25 09:01:18 fw01 %ASA-4-106023: Deny tcp src outside:198.51.100.23/22739 dst inside:10.20.30.40/443 by access-group "outside_acl" [0x0, 0x0]
+<164>Sep 25 09:01:21 fw01 %ASA-4-106100: access-list outside_acl denied tcp inside/10.2.1.7(52544) -> outside/52.95.110.1(8443) hit-cnt 422 first hit [0xd56a64b2, 0x0]
+<164>Sep 25 09:01:24 fw01 %ASA-4-106023: Deny udp src outside:203.0.113.5/22541 dst inside:172.16.9.2/53 by access-group "outside_acl" [0x0, 0x0]
+<166>Sep 25 09:01:24 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/10.55.3.90(10537) -> outside/52.95.110.1(80) hit-cnt 462 first hit [0x30499347, 0x0]
+<164>Sep 25 09:01:27 fw01 %ASA-4-106023: Deny tcp src outside:192.0.2.77/49649 dst inside:10.20.30.40/443 by access-group "outside_acl" [0x0, 0x0]
+<166>Sep 25 09:01:30 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/172.16.9.2(14859) -> outside/52.95.110.1(8443) hit-cnt 338 first hit [0xbc176c3b, 0x0]
+<166>Sep 25 09:01:30 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/10.20.30.40(38869) -> outside/8.8.8.8(22) hit-cnt 328 first hit [0xe09152b3, 0x0]
+<166>Sep 25 09:01:33 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/10.55.3.90(52438) -> outside/13.107.42.14(80) hit-cnt 292 first hit [0x8eaef42b, 0x0]
+<166>Sep 25 09:01:36 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/172.16.9.2(33581) -> outside/1.1.1.1(8443) hit-cnt 276 first hit [0xbb61c9cb, 0x0]
+<164>Sep 25 09:01:36 fw01 %ASA-4-106100: access-list outside_acl denied tcp inside/192.168.4.11(35275) -> outside/52.95.110.1(8443) hit-cnt 39 first hit [0xbae152d3, 0x0]
+<166>Sep 25 09:01:39 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/10.20.30.40(60151) -> outside/1.1.1.1(443) hit-cnt 499 first hit [0x89f073e2, 0x0]
+<164>Sep 25 09:01:42 fw01 %ASA-4-106100: access-list outside_acl denied udp inside/10.55.3.90(13405) -> outside/1.1.1.1(53) hit-cnt 430 first hit [0xca201c55, 0x0]
+<164>Sep 25 09:01:42 fw01 %ASA-4-106100: access-list outside_acl denied tcp inside/172.16.9.2(14750) -> outside/142.250.183.14(22) hit-cnt 407 first hit [0xf7b5b335, 0x0]
+<164>Sep 25 09:01:45 fw01 %ASA-4-106100: access-list outside_acl denied tcp inside/172.16.9.2(16310) -> outside/13.107.42.14(443) hit-cnt 102 first hit [0xb9d00679, 0x0]
+<166>Sep 25 09:01:48 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/192.168.4.11(60623) -> outside/8.8.8.8(22) hit-cnt 343 first hit [0xe442b063, 0x0]
+<166>Sep 25 09:01:48 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/10.20.30.40(27039) -> outside/13.107.42.14(22) hit-cnt 432 first hit [0xa0397e95, 0x0]
+<166>Sep 25 09:01:51 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/172.16.9.2(41141) -> outside/52.95.110.1(80) hit-cnt 121 first hit [0xad87759c, 0x0]
+<166>Sep 25 09:01:54 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/10.20.30.40(5038) -> outside/8.8.8.8(80) hit-cnt 156 first hit [0x9f55ec2e, 0x0]
+<166>Sep 25 09:01:54 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/172.16.9.2(14104) -> outside/142.250.183.14(22) hit-cnt 201 first hit [0x234a4c4f, 0x0]
+<166>Sep 25 09:01:57 fw01 %ASA-6-106100: access-list outside_acl permitted udp inside/192.168.4.11(51196) -> outside/1.1.1.1(53) hit-cnt 342 first hit [0x969e27a3, 0x0]
+<166>Sep 25 09:02:00 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/10.55.3.90(36412) -> outside/1.1.1.1(8443) hit-cnt 199 first hit [0x5d510069, 0x0]
+<164>Sep 25 09:02:00 fw01 %ASA-4-106100: access-list outside_acl denied tcp inside/172.16.9.2(58224) -> outside/52.95.110.1(443) hit-cnt 402 first hit [0xdbf459f8, 0x0]
+<164>Sep 25 09:02:03 fw01 %ASA-4-106100: access-list outside_acl denied tcp inside/10.2.1.7(33910) -> outside/13.107.42.14(443) hit-cnt 415 first hit [0xe8edea70, 0x0]
+<164>Sep 25 09:02:06 fw01 %ASA-4-106023: Deny udp src outside:203.0.113.5/19581 dst inside:192.168.4.11/53 by access-group "outside_acl" [0x0, 0x0]
+<166>Sep 25 09:02:06 fw01 %ASA-6-106100: access-list outside_acl permitted udp inside/172.16.9.2(32610) -> outside/8.8.8.8(53) hit-cnt 316 first hit [0x365638f1, 0x0]
+<164>Sep 25 09:02:09 fw01 %ASA-4-106023: Deny tcp src outside:192.0.2.77/61040 dst inside:10.20.30.40/8443 by access-group "outside_acl" [0x0, 0x0]
+<164>Sep 25 09:02:12 fw01 %ASA-4-106100: access-list outside_acl denied tcp inside/10.55.3.90(5724) -> outside/142.250.183.14(22) hit-cnt 114 first hit [0xb0a39b99, 0x0]
+<166>Sep 25 09:02:12 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/10.55.3.90(32517) -> outside/13.107.42.14(80) hit-cnt 287 first hit [0x3c358d03, 0x0]
+<166>Sep 25 09:02:15 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/192.168.4.11(23219) -> outside/13.107.42.14(22) hit-cnt 183 first hit [0xa7bf7fa5, 0x0]
+<166>Sep 25 09:02:18 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/172.16.9.2(43502) -> outside/1.1.1.1(443) hit-cnt 235 first hit [0x35fc398e, 0x0]
+<164>Sep 25 09:02:18 fw01 %ASA-4-106100: access-list outside_acl denied udp inside/10.20.30.40(27451) -> outside/142.250.183.14(53) hit-cnt 495 first hit [0xbf4ed397, 0x0]
+<166>Sep 25 09:02:21 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/10.2.1.7(16693) -> outside/142.250.183.14(22) hit-cnt 325 first hit [0xca2a69b2, 0x0]
+<164>Sep 25 09:02:24 fw01 %ASA-4-106100: access-list outside_acl denied tcp inside/10.20.30.40(52361) -> outside/13.107.42.14(22) hit-cnt 82 first hit [0x6c5e4275, 0x0]
+<164>Sep 25 09:02:24 fw01 %ASA-4-106023: Deny udp src outside:192.0.2.77/53109 dst inside:192.168.4.11/53 by access-group "outside_acl" [0x0, 0x0]
+<166>Sep 25 09:02:27 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/10.20.30.40(56240) -> outside/142.250.183.14(80) hit-cnt 32 first hit [0xaee42e32, 0x0]
+<164>Sep 25 09:02:30 fw01 %ASA-4-106100: access-list outside_acl denied tcp inside/10.2.1.7(50574) -> outside/142.250.183.14(8443) hit-cnt 244 first hit [0xd3673a66, 0x0]
+<164>Sep 25 09:02:30 fw01 %ASA-4-106023: Deny tcp src outside:203.0.113.5/8128 dst inside:10.20.30.40/8443 by access-group "outside_acl" [0x0, 0x0]
+<166>Sep 25 09:02:33 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/10.55.3.90(65052) -> outside/1.1.1.1(443) hit-cnt 273 first hit [0xefbe1cad, 0x0]
+<166>Sep 25 09:02:36 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/10.20.30.40(34033) -> outside/13.107.42.14(80) hit-cnt 440 first hit [0x5fbaa1cc, 0x0]
+<166>Sep 25 09:02:36 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/192.168.4.11(20661) -> outside/52.95.110.1(443) hit-cnt 220 first hit [0x3f68d375, 0x0]
+<164>Sep 25 09:02:39 fw01 %ASA-4-106100: access-list outside_acl denied tcp inside/172.16.9.2(49745) -> outside/8.8.8.8(80) hit-cnt 287 first hit [0x77836197, 0x0]
+<166>Sep 25 09:02:42 fw01 %ASA-6-106100: access-list outside_acl permitted udp inside/10.20.30.40(26785) -> outside/13.107.42.14(53) hit-cnt 90 first hit [0x6e916ab2, 0x0]
+<164>Sep 25 09:02:42 fw01 %ASA-4-106023: Deny tcp src outside:203.0.113.5/38984 dst inside:172.16.9.2/22 by access-group "outside_acl" [0x0, 0x0]
+<166>Sep 25 09:02:45 fw01 %ASA-6-302013: Built outbound TCP connection 691158 for outside:142.250.183.14/443 (142.250.183.14/443) to inside:10.20.30.40/28457 (10.20.30.40/28457)
+<166>Sep 25 09:02:48 fw01 %ASA-6-302013: Built outbound TCP connection 518751 for outside:52.95.110.1/80 (52.95.110.1/80) to inside:192.168.4.11/60581 (192.168.4.11/60581)
+<166>Sep 25 09:02:48 fw01 %ASA-6-302013: Built outbound TCP connection 885343 for outside:13.107.42.14/8443 (13.107.42.14/8443) to inside:192.168.4.11/9055 (192.168.4.11/9055)
+<166>Sep 25 09:02:51 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/10.20.30.40(59197) -> outside/13.107.42.14(443) hit-cnt 420 first hit [0x688b13e6, 0x0]
+<164>Sep 25 09:02:54 fw01 %ASA-4-106100: access-list outside_acl denied tcp inside/192.168.4.11(20786) -> outside/13.107.42.14(443) hit-cnt 232 first hit [0x8c35daf3, 0x0]
+<166>Sep 25 09:02:54 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/10.2.1.7(42842) -> outside/13.107.42.14(8443) hit-cnt 61 first hit [0x72dbc515, 0x0]
+<166>Sep 25 09:02:57 fw01 %ASA-6-302013: Built outbound TCP connection 734688 for outside:52.95.110.1/8443 (52.95.110.1/8443) to inside:172.16.9.2/2789 (172.16.9.2/2789)
+<164>Sep 25 09:03:00 fw01 %ASA-4-106023: Deny tcp src outside:192.0.2.77/46386 dst inside:192.168.4.11/80 by access-group "outside_acl" [0x0, 0x0]
+<166>Sep 25 09:03:00 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/192.168.4.11(61460) -> outside/52.95.110.1(22) hit-cnt 264 first hit [0x98e771ed, 0x0]
+<166>Sep 25 09:03:03 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/10.2.1.7(4476) -> outside/8.8.8.8(22) hit-cnt 391 first hit [0x97fb8d8b, 0x0]
+<164>Sep 25 09:03:06 fw01 %ASA-4-106023: Deny tcp src outside:198.51.100.23/41363 dst inside:10.20.30.40/22 by access-group "outside_acl" [0x0, 0x0]
+<166>Sep 25 09:03:06 fw01 %ASA-6-302013: Built outbound TCP connection 962779 for outside:1.1.1.1/443 (1.1.1.1/443) to inside:192.168.4.11/27666 (192.168.4.11/27666)
+<164>Sep 25 09:03:09 fw01 %ASA-4-106023: Deny tcp src outside:203.0.113.5/58434 dst inside:192.168.4.11/22 by access-group "outside_acl" [0x0, 0x0]
+<166>Sep 25 09:03:12 fw01 %ASA-6-302013: Built outbound TCP connection 837641 for outside:13.107.42.14/443 (13.107.42.14/443) to inside:10.55.3.90/21210 (10.55.3.90/21210)
+<166>Sep 25 09:03:12 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/10.20.30.40(12354) -> outside/13.107.42.14(443) hit-cnt 178 first hit [0x2d235fb6, 0x0]
+<166>Sep 25 09:03:15 fw01 %ASA-6-302013: Built outbound TCP connection 941559 for outside:142.250.183.14/22 (142.250.183.14/22) to inside:10.20.30.40/32224 (10.20.30.40/32224)
+<166>Sep 25 09:03:18 fw01 %ASA-6-302013: Built outbound TCP connection 295716 for outside:8.8.8.8/443 (8.8.8.8/443) to inside:10.2.1.7/5035 (10.2.1.7/5035)
+<164>Sep 25 09:03:18 fw01 %ASA-4-106023: Deny tcp src outside:198.51.100.23/1727 dst inside:192.168.4.11/443 by access-group "outside_acl" [0x0, 0x0]
+<166>Sep 25 09:03:21 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/172.16.9.2(4160) -> outside/1.1.1.1(443) hit-cnt 327 first hit [0xa0a7715d, 0x0]
+<164>Sep 25 09:03:24 fw01 %ASA-4-106023: Deny tcp src outside:203.0.113.5/14223 dst inside:10.2.1.7/22 by access-group "outside_acl" [0x0, 0x0]
+<166>Sep 25 09:03:24 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/10.55.3.90(12736) -> outside/1.1.1.1(8443) hit-cnt 447 first hit [0xe79fceab, 0x0]
+<166>Sep 25 09:03:27 fw01 %ASA-6-302013: Built outbound TCP connection 735494 for outside:1.1.1.1/80 (1.1.1.1/80) to inside:192.168.4.11/22247 (192.168.4.11/22247)
+<164>Sep 25 09:03:30 fw01 %ASA-4-106100: access-list outside_acl denied tcp inside/10.55.3.90(1225) -> outside/13.107.42.14(22) hit-cnt 430 first hit [0x46a20d86, 0x0]
+<166>Sep 25 09:03:30 fw01 %ASA-6-302013: Built outbound TCP connection 337433 for outside:13.107.42.14/53 (13.107.42.14/53) to inside:10.20.30.40/15606 (10.20.30.40/15606)
+<166>Sep 25 09:03:33 fw01 %ASA-6-302013: Built outbound TCP connection 712758 for outside:13.107.42.14/443 (13.107.42.14/443) to inside:10.2.1.7/18529 (10.2.1.7/18529)
+<166>Sep 25 09:03:36 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/10.55.3.90(17097) -> outside/142.250.183.14(8443) hit-cnt 105 first hit [0x024ced07, 0x0]
+<166>Sep 25 09:03:36 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/172.16.9.2(11159) -> outside/1.1.1.1(443) hit-cnt 429 first hit [0x04c73279, 0x0]
+<166>Sep 25 09:03:39 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/10.2.1.7(2104) -> outside/13.107.42.14(80) hit-cnt 114 first hit [0x9d409f5e, 0x0]
+<164>Sep 25 09:03:42 fw01 %ASA-4-106023: Deny tcp src outside:203.0.113.5/22409 dst inside:10.55.3.90/443 by access-group "outside_acl" [0x0, 0x0]
+<164>Sep 25 09:03:42 fw01 %ASA-4-106023: Deny tcp src outside:198.51.100.23/30496 dst inside:10.55.3.90/443 by access-group "outside_acl" [0x0, 0x0]
+<166>Sep 25 09:03:45 fw01 %ASA-6-302013: Built outbound TCP connection 300956 for outside:13.107.42.14/53 (13.107.42.14/53) to inside:10.55.3.90/48690 (10.55.3.90/48690)
+<166>Sep 25 09:03:48 fw01 %ASA-6-302013: Built outbound TCP connection 505068 for outside:13.107.42.14/22 (13.107.42.14/22) to inside:172.16.9.2/3033 (172.16.9.2/3033)
+<166>Sep 25 09:03:48 fw01 %ASA-6-302013: Built outbound TCP connection 413691 for outside:13.107.42.14/80 (13.107.42.14/80) to inside:172.16.9.2/36610 (172.16.9.2/36610)
+<164>Sep 25 09:03:51 fw01 %ASA-4-106023: Deny tcp src outside:192.0.2.77/37750 dst inside:192.168.4.11/80 by access-group "outside_acl" [0x0, 0x0]
+<166>Sep 25 09:03:54 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/10.55.3.90(28370) -> outside/13.107.42.14(8443) hit-cnt 131 first hit [0xfff8da37, 0x0]
+<164>Sep 25 09:03:54 fw01 %ASA-4-106023: Deny tcp src outside:203.0.113.5/61493 dst inside:10.2.1.7/22 by access-group "outside_acl" [0x0, 0x0]
+<164>Sep 25 09:03:57 fw01 %ASA-4-106023: Deny tcp src outside:198.51.100.23/35200 dst inside:10.2.1.7/80 by access-group "outside_acl" [0x0, 0x0]
+<164>Sep 25 09:04:00 fw01 %ASA-4-106100: access-list outside_acl denied tcp inside/172.16.9.2(38651) -> outside/1.1.1.1(8443) hit-cnt 95 first hit [0x9a2151e6, 0x0]
+<166>Sep 25 09:04:00 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/172.16.9.2(17125) -> outside/142.250.183.14(22) hit-cnt 443 first hit [0x21d6fa44, 0x0]
+<166>Sep 25 09:04:03 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/172.16.9.2(38565) -> outside/142.250.183.14(443) hit-cnt 76 first hit [0xfe3eff56, 0x0]
+<166>Sep 25 09:04:06 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/192.168.4.11(11167) -> outside/142.250.183.14(80) hit-cnt 440 first hit [0xda771652, 0x0]
+<164>Sep 25 09:04:06 fw01 %ASA-4-106023: Deny tcp src outside:203.0.113.5/25451 dst inside:10.20.30.40/80 by access-group "outside_acl" [0x0, 0x0]
+<166>Sep 25 09:04:09 fw01 %ASA-6-302013: Built outbound TCP connection 109841 for outside:142.250.183.14/80 (142.250.183.14/80) to inside:10.2.1.7/60092 (10.2.1.7/60092)
+<166>Sep 25 09:04:12 fw01 %ASA-6-302013: Built outbound TCP connection 990914 for outside:8.8.8.8/22 (8.8.8.8/22) to inside:10.20.30.40/34569 (10.20.30.40/34569)
+<166>Sep 25 09:04:12 fw01 %ASA-6-106100: access-list outside_acl permitted udp inside/10.55.3.90(64679) -> outside/13.107.42.14(53) hit-cnt 248 first hit [0x0b4412e7, 0x0]
+<164>Sep 25 09:04:15 fw01 %ASA-4-106023: Deny tcp src outside:198.51.100.23/5709 dst inside:10.20.30.40/443 by access-group "outside_acl" [0x0, 0x0]
+<166>Sep 25 09:04:18 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/10.20.30.40(31696) -> outside/13.107.42.14(8443) hit-cnt 147 first hit [0xd2beb057, 0x0]
+<166>Sep 25 09:04:18 fw01 %ASA-6-302013: Built outbound TCP connection 276599 for outside:8.8.8.8/80 (8.8.8.8/80) to inside:192.168.4.11/56741 (192.168.4.11/56741)
+<164>Sep 25 09:04:21 fw01 %ASA-4-106100: access-list outside_acl denied tcp inside/192.168.4.11(2909) -> outside/52.95.110.1(443) hit-cnt 378 first hit [0xf834de68, 0x0]
+<166>Sep 25 09:04:24 fw01 %ASA-6-302013: Built outbound TCP connection 814485 for outside:52.95.110.1/22 (52.95.110.1/22) to inside:10.55.3.90/30103 (10.55.3.90/30103)
+<164>Sep 25 09:04:24 fw01 %ASA-4-106023: Deny tcp src outside:203.0.113.5/45404 dst inside:172.16.9.2/80 by access-group "outside_acl" [0x0, 0x0]
+<166>Sep 25 09:04:27 fw01 %ASA-6-106100: access-list outside_acl permitted udp inside/10.2.1.7(8071) -> outside/142.250.183.14(53) hit-cnt 205 first hit [0x3ee32ee7, 0x0]
+<166>Sep 25 09:04:30 fw01 %ASA-6-106100: access-list outside_acl permitted udp inside/10.55.3.90(42042) -> outside/52.95.110.1(53) hit-cnt 328 first hit [0xd5ea7df5, 0x0]
+<164>Sep 25 09:04:30 fw01 %ASA-4-106023: Deny tcp src outside:203.0.113.5/42997 dst inside:10.2.1.7/80 by access-group "outside_acl" [0x0, 0x0]
+<166>Sep 25 09:04:33 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/172.16.9.2(16682) -> outside/8.8.8.8(8443) hit-cnt 15 first hit [0x54b289aa, 0x0]
+<164>Sep 25 09:04:36 fw01 %ASA-4-106023: Deny tcp src outside:198.51.100.23/58364 dst inside:10.20.30.40/22 by access-group "outside_acl" [0x0, 0x0]
+<166>Sep 25 09:04:36 fw01 %ASA-6-302013: Built outbound TCP connection 603371 for outside:13.107.42.14/8443 (13.107.42.14/8443) to inside:172.16.9.2/31256 (172.16.9.2/31256)
+<166>Sep 25 09:04:39 fw01 %ASA-6-302013: Built outbound TCP connection 490461 for outside:52.95.110.1/8443 (52.95.110.1/8443) to inside:10.2.1.7/44125 (10.2.1.7/44125)
+<164>Sep 25 09:04:42 fw01 %ASA-4-106100: access-list outside_acl denied tcp inside/10.55.3.90(17202) -> outside/1.1.1.1(22) hit-cnt 67 first hit [0x55aa79bd, 0x0]
+<166>Sep 25 09:04:42 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/192.168.4.11(47820) -> outside/142.250.183.14(80) hit-cnt 318 first hit [0x5703f469, 0x0]
+<164>Sep 25 09:04:45 fw01 %ASA-4-106100: access-list outside_acl denied udp inside/172.16.9.2(10361) -> outside/1.1.1.1(53) hit-cnt 122 first hit [0x9a7c2e8b, 0x0]
+<164>Sep 25 09:04:48 fw01 %ASA-4-106100: access-list outside_acl denied tcp inside/172.16.9.2(46649) -> outside/1.1.1.1(8443) hit-cnt 159 first hit [0x1c97a08a, 0x0]
+<166>Sep 25 09:04:48 fw01 %ASA-6-302013: Built outbound TCP connection 567459 for outside:8.8.8.8/22 (8.8.8.8/22) to inside:10.2.1.7/3181 (10.2.1.7/3181)
+<164>Sep 25 09:04:51 fw01 %ASA-4-106100: access-list outside_acl denied tcp inside/10.20.30.40(7280) -> outside/8.8.8.8(8443) hit-cnt 382 first hit [0xd0a5695e, 0x0]
+<166>Sep 25 09:04:54 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/192.168.4.11(15745) -> outside/142.250.183.14(443) hit-cnt 219 first hit [0x4aed0cc1, 0x0]
+<166>Sep 25 09:04:54 fw01 %ASA-6-302013: Built outbound TCP connection 409022 for outside:8.8.8.8/53 (8.8.8.8/53) to inside:10.2.1.7/35288 (10.2.1.7/35288)
+<166>Sep 25 09:04:57 fw01 %ASA-6-302013: Built outbound TCP connection 116154 for outside:52.95.110.1/22 (52.95.110.1/22) to inside:10.2.1.7/51390 (10.2.1.7/51390)
+<166>Sep 25 09:05:00 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/172.16.9.2(4318) -> outside/13.107.42.14(443) hit-cnt 485 first hit [0x04fa408a, 0x0]
+<164>Sep 25 09:05:00 fw01 %ASA-4-106023: Deny tcp src outside:203.0.113.5/25185 dst inside:10.20.30.40/22 by access-group "outside_acl" [0x0, 0x0]
+<164>Sep 25 09:05:03 fw01 %ASA-4-106023: Deny tcp src outside:192.0.2.77/28508 dst inside:10.20.30.40/22 by access-group "outside_acl" [0x0, 0x0]
+<166>Sep 25 09:05:06 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/172.16.9.2(45618) -> outside/1.1.1.1(443) hit-cnt 235 first hit [0xa5102488, 0x0]
+<164>Sep 25 09:05:06 fw01 %ASA-4-106023: Deny tcp src outside:203.0.113.5/44090 dst inside:172.16.9.2/80 by access-group "outside_acl" [0x0, 0x0]
+<166>Sep 25 09:05:09 fw01 %ASA-6-302013: Built outbound TCP connection 187428 for outside:8.8.8.8/80 (8.8.8.8/80) to inside:192.168.4.11/16038 (192.168.4.11/16038)
+<166>Sep 25 09:05:12 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/10.2.1.7(27844) -> outside/52.95.110.1(80) hit-cnt 109 first hit [0x0036ae1c, 0x0]
+<166>Sep 25 09:05:12 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/192.168.4.11(22474) -> outside/142.250.183.14(22) hit-cnt 424 first hit [0x45693571, 0x0]
+<166>Sep 25 09:05:15 fw01 %ASA-6-106100: access-list outside_acl permitted udp inside/172.16.9.2(18441) -> outside/1.1.1.1(53) hit-cnt 272 first hit [0x872195a9, 0x0]
+<166>Sep 25 09:05:18 fw01 %ASA-6-106100: access-list outside_acl permitted udp inside/172.16.9.2(43852) -> outside/52.95.110.1(53) hit-cnt 394 first hit [0x5a3cc63b, 0x0]
+<166>Sep 25 09:05:18 fw01 %ASA-6-302013: Built outbound TCP connection 984043 for outside:1.1.1.1/22 (1.1.1.1/22) to inside:10.55.3.90/51145 (10.55.3.90/51145)
+<166>Sep 25 09:05:21 fw01 %ASA-6-302013: Built outbound TCP connection 744085 for outside:52.95.110.1/8443 (52.95.110.1/8443) to inside:192.168.4.11/56473 (192.168.4.11/56473)
+<164>Sep 25 09:05:24 fw01 %ASA-4-106023: Deny tcp src outside:192.0.2.77/64271 dst inside:10.2.1.7/80 by access-group "outside_acl" [0x0, 0x0]
+<166>Sep 25 09:05:24 fw01 %ASA-6-302013: Built outbound TCP connection 615621 for outside:1.1.1.1/53 (1.1.1.1/53) to inside:192.168.4.11/3629 (192.168.4.11/3629)
+<166>Sep 25 09:05:27 fw01 %ASA-6-302013: Built outbound TCP connection 911150 for outside:52.95.110.1/22 (52.95.110.1/22) to inside:10.2.1.7/7272 (10.2.1.7/7272)
+<164>Sep 25 09:05:30 fw01 %ASA-4-106100: access-list outside_acl denied udp inside/10.55.3.90(5953) -> outside/142.250.183.14(53) hit-cnt 441 first hit [0x96ad4224, 0x0]
+<164>Sep 25 09:05:30 fw01 %ASA-4-106023: Deny udp src outside:192.0.2.77/10651 dst inside:172.16.9.2/53 by access-group "outside_acl" [0x0, 0x0]
+<166>Sep 25 09:05:33 fw01 %ASA-6-302013: Built outbound TCP connection 675509 for outside:1.1.1.1/443 (1.1.1.1/443) to inside:172.16.9.2/17029 (172.16.9.2/17029)
+<166>Sep 25 09:05:36 fw01 %ASA-6-302013: Built outbound TCP connection 413452 for outside:13.107.42.14/8443 (13.107.42.14/8443) to inside:10.2.1.7/15007 (10.2.1.7/15007)
+<166>Sep 25 09:05:36 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/10.55.3.90(36017) -> outside/8.8.8.8(443) hit-cnt 240 first hit [0x16ca995e, 0x0]
+<166>Sep 25 09:05:39 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/172.16.9.2(58023) -> outside/52.95.110.1(443) hit-cnt 273 first hit [0x882f4c7c, 0x0]
+<166>Sep 25 09:05:42 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/10.55.3.90(20478) -> outside/52.95.110.1(80) hit-cnt 458 first hit [0xe52c8018, 0x0]
+<164>Sep 25 09:05:42 fw01 %ASA-4-106023: Deny udp src outside:198.51.100.23/56872 dst inside:10.20.30.40/53 by access-group "outside_acl" [0x0, 0x0]
+<166>Sep 25 09:05:45 fw01 %ASA-6-302013: Built outbound TCP connection 992686 for outside:52.95.110.1/53 (52.95.110.1/53) to inside:10.55.3.90/1714 (10.55.3.90/1714)
+<164>Sep 25 09:05:48 fw01 %ASA-4-106100: access-list outside_acl denied tcp inside/10.20.30.40(42053) -> outside/1.1.1.1(8443) hit-cnt 209 first hit [0x3755af20, 0x0]
+<164>Sep 25 09:05:48 fw01 %ASA-4-106100: access-list outside_acl denied tcp inside/172.16.9.2(21588) -> outside/1.1.1.1(443) hit-cnt 15 first hit [0x2fa510eb, 0x0]
+<164>Sep 25 09:05:51 fw01 %ASA-4-106100: access-list outside_acl denied tcp inside/192.168.4.11(53259) -> outside/13.107.42.14(8443) hit-cnt 139 first hit [0x025ad806, 0x0]
+<164>Sep 25 09:05:54 fw01 %ASA-4-106023: Deny tcp src outside:203.0.113.5/3551 dst inside:10.2.1.7/443 by access-group "outside_acl" [0x0, 0x0]
+<166>Sep 25 09:05:54 fw01 %ASA-6-302013: Built outbound TCP connection 120802 for outside:1.1.1.1/80 (1.1.1.1/80) to inside:10.55.3.90/56946 (10.55.3.90/56946)
+<164>Sep 25 09:05:57 fw01 %ASA-4-106023: Deny tcp src outside:192.0.2.77/25992 dst inside:10.55.3.90/80 by access-group "outside_acl" [0x0, 0x0]
+<166>Sep 25 09:06:00 fw01 %ASA-6-302013: Built outbound TCP connection 188277 for outside:52.95.110.1/443 (52.95.110.1/443) to inside:10.2.1.7/22069 (10.2.1.7/22069)
+<164>Sep 25 09:06:00 fw01 %ASA-4-106023: Deny tcp src outside:198.51.100.23/34344 dst inside:10.55.3.90/22 by access-group "outside_acl" [0x0, 0x0]
+<164>Sep 25 09:06:03 fw01 %ASA-4-106023: Deny tcp src outside:198.51.100.23/58209 dst inside:192.168.4.11/8443 by access-group "outside_acl" [0x0, 0x0]
+<166>Sep 25 09:06:06 fw01 %ASA-6-106100: access-list outside_acl permitted udp inside/10.20.30.40(61649) -> outside/142.250.183.14(53) hit-cnt 442 first hit [0x191e6631, 0x0]
+<166>Sep 25 09:06:06 fw01 %ASA-6-302013: Built outbound TCP connection 985898 for outside:13.107.42.14/80 (13.107.42.14/80) to inside:10.2.1.7/22714 (10.2.1.7/22714)
+<164>Sep 25 09:06:09 fw01 %ASA-4-106023: Deny udp src outside:203.0.113.5/28221 dst inside:172.16.9.2/53 by access-group "outside_acl" [0x0, 0x0]
+<166>Sep 25 09:06:12 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/10.20.30.40(18639) -> outside/13.107.42.14(22) hit-cnt 196 first hit [0xf3859ec5, 0x0]
+<166>Sep 25 09:06:12 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/10.55.3.90(26805) -> outside/142.250.183.14(443) hit-cnt 385 first hit [0x45bcb39e, 0x0]
+<166>Sep 25 09:06:15 fw01 %ASA-6-302013: Built outbound TCP connection 437188 for outside:13.107.42.14/53 (13.107.42.14/53) to inside:10.20.30.40/21524 (10.20.30.40/21524)
+<166>Sep 25 09:06:18 fw01 %ASA-6-302013: Built outbound TCP connection 185313 for outside:1.1.1.1/443 (1.1.1.1/443) to inside:192.168.4.11/28285 (192.168.4.11/28285)
+<164>Sep 25 09:06:18 fw01 %ASA-4-106023: Deny udp src outside:192.0.2.77/10050 dst inside:10.55.3.90/53 by access-group "outside_acl" [0x0, 0x0]
+<164>Sep 25 09:06:21 fw01 %ASA-4-106100: access-list outside_acl denied tcp inside/192.168.4.11(48789) -> outside/8.8.8.8(80) hit-cnt 127 first hit [0x1f3fc3c6, 0x0]
+<166>Sep 25 09:06:24 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/10.55.3.90(27189) -> outside/1.1.1.1(8443) hit-cnt 268 first hit [0xbdd42a51, 0x0]
+<164>Sep 25 09:06:24 fw01 %ASA-4-106023: Deny tcp src outside:192.0.2.77/2131 dst inside:10.2.1.7/8443 by access-group "outside_acl" [0x0, 0x0]
+<164>Sep 25 09:06:27 fw01 %ASA-4-106100: access-list outside_acl denied tcp inside/172.16.9.2(47355) -> outside/8.8.8.8(22) hit-cnt 26 first hit [0x328043c9, 0x0]
+<166>Sep 25 09:06:30 fw01 %ASA-6-106100: access-list outside_acl permitted tcp inside/10.2.1.7(1564) -> outside/13.107.42.14(8443) hit-cnt 488 first hit [0x2af995de, 0x0]
+<164>Sep 25 09:06:30 fw01 %ASA-4-106100: access-list outside_acl denied udp inside/192.168.4.11(63405) -> outside/52.95.110.1(53) hit-cnt 375 first hit [0xe6926f9f, 0x0]
+<164>Sep 25 09:06:33 fw01 %ASA-4-106100: access-list outside_acl denied udp inside/192.168.4.11(35044) -> outside/52.95.110.1(53) hit-cnt 127 first hit [0xed8d1c42, 0x0]
+<166>Sep 25 09:06:36 fw01 %ASA-6-302013: Built outbound TCP connection 963921 for outside:13.107.42.14/80 (13.107.42.14/80) to inside:192.168.4.11/29528 (192.168.4.11/29528)
+<164>Sep 25 09:06:36 fw01 %ASA-4-106023: Deny tcp src outside:192.0.2.77/35096 dst inside:192.168.4.11/80 by access-group "outside_acl" [0x0, 0x0]
+<164>Sep 25 09:06:39 fw01 %ASA-4-106100: access-list outside_acl denied tcp inside/192.168.4.11(9026) -> outside/8.8.8.8(80) hit-cnt 265 first hit [0x0348e270, 0x0]

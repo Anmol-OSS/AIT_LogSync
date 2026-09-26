@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+build/
+dist/
+
+# Benchmark output
+bench_results.json
+
+# Rust / WASM (from M5b)
+target/
+
+# Node (from M2)
+node_modules/
+
+# Local data written by the pipeline (from M4)
+data/
+
+# Editors / OS
+.idea/
+.vscode/
+Thumbs.db
+.DS_Store
+
+# Frontend build output
+frontend/dist/
