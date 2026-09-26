@@ -1,0 +1,176 @@
+{
+  "draft_id": "draft_srx_001",
+  "detected": {
+    "fingerprint": "RT_FLOW: RT_FLOW_SESSION_CREATE",
+    "lines": 304,
+    "source_ip": "10.9.0.4"
+  },
+  "generator": "llama3:8b (offline)",
+  "sample": [
+    "<14>Sep 25 09:14:02 srx-edge01 RT_FLOW: RT_FLOW_SESSION_CREATE: session created 10.2.1.7/51514->8.8.8.8/53 0x0 junos-dns-udp 203.0.113.10/40211->8.8.8.8/53 0x0 source-nat-rule-1 N/A N/A 17 allow-dns trust untrust 48213 N/A(N/A) ge-0/0/1.0",
+    "<14>Sep 25 09:14:05 srx-edge01 RT_FLOW: RT_FLOW_SESSION_CREATE: session created 192.168.4.11/60122->142.250.183.14/443 0x0 junos-https 203.0.113.10/40877->142.250.183.14/443 0x0 source-nat-rule-1 N/A N/A 6 allow-web trust untrust 48214 N/A(N/A) ge-0/0/1.0",
+    "<14>Sep 25 09:14:09 srx-edge01 RT_FLOW: RT_FLOW_SESSION_CREATE: session created 10.55.3.90/49810->13.107.42.14/443 0x0 junos-https 203.0.113.10/41020->13.107.42.14/443 0x0 source-nat-rule-1 N/A N/A 6 allow-web trust untrust 48215 N/A(N/A) ge-0/0/1.0"
+  ],
+  "pattern": "%{SYSLOGPRI}%{SYSLOGTIMESTAMP:ts} %{HOSTNAME:host} RT_FLOW: %{WORD:event}: session created %{IP:src_ip}/%{INT:src_port}->%{IP:dst_ip}/%{INT:dst_port} 0x0 %{NOTSPACE:service} %{IP:nat_src_ip}/%{INT}->%{IP}/%{INT} 0x0 %{NOTSPACE} N/A N/A %{INT:proto} %{NOTSPACE:policy} %{WORD:src_zone} %{WORD} %{INT} %{GREEDYDATA:rest}",
+  "confidence": 0.91,
+  "validation": [
+    {
+      "name": "match_rate",
+      "status": "pass",
+      "detail": "3 / 3 sample lines matched"
+    },
+    {
+      "name": "roundtrip",
+      "status": "pass",
+      "detail": "all bytes explained on every sample line"
+    },
+    {
+      "name": "fuzz",
+      "status": "pass",
+      "detail": "500 mutated lines: no crash, no timeout (fuel limit)"
+    },
+    {
+      "name": "differential",
+      "status": "pass",
+      "detail": "WASM output == Python reference output"
+    }
+  ],
+  "fields": [
+    {
+      "name": "ts",
+      "grok": "SYSLOGTIMESTAMP",
+      "sample_value": "Sep 25 09:14:02",
+      "bytes": [
+        4,
+        19
+      ],
+      "mapped_to": "time"
+    },
+    {
+      "name": "host",
+      "grok": "HOSTNAME",
+      "sample_value": "srx-edge01",
+      "bytes": [
+        20,
+        30
+      ],
+      "mapped_to": "device.hostname"
+    },
+    {
+      "name": "event",
+      "grok": "WORD",
+      "sample_value": "RT_FLOW_SESSION_CREATE",
+      "bytes": [
+        40,
+        62
+      ],
+      "mapped_to": "metadata.event_code"
+    },
+    {
+      "name": "src_ip",
+      "grok": "IP",
+      "sample_value": "10.2.1.7",
+      "bytes": [
+        80,
+        88
+      ],
+      "mapped_to": "src_endpoint.ip"
+    },
+    {
+      "name": "src_port",
+      "grok": "INT",
+      "sample_value": "51514",
+      "bytes": [
+        89,
+        94
+      ],
+      "mapped_to": "src_endpoint.port"
+    },
+    {
+      "name": "dst_ip",
+      "grok": "IP",
+      "sample_value": "8.8.8.8",
+      "bytes": [
+        96,
+        103
+      ],
+      "mapped_to": "dst_endpoint.ip"
+    },
+    {
+      "name": "dst_port",
+      "grok": "INT",
+      "sample_value": "53",
+      "bytes": [
+        104,
+        106
+      ],
+      "mapped_to": "dst_endpoint.port"
+    },
+    {
+      "name": "service",
+      "grok": "NOTSPACE",
+      "sample_value": "junos-dns-udp",
+      "bytes": [
+        111,
+        124
+      ],
+      "mapped_to": "unmapped.service"
+    },
+    {
+      "name": "nat_src_ip",
+      "grok": "IP",
+      "sample_value": "203.0.113.10",
+      "bytes": [
+        125,
+        137
+      ],
+      "mapped_to": "unmapped.nat_src_ip"
+    },
+    {
+      "name": "proto",
+      "grok": "INT",
+      "sample_value": "17",
+      "bytes": [
+        186,
+        188
+      ],
+      "mapped_to": "connection_info.protocol_num"
+    },
+    {
+      "name": "policy",
+      "grok": "NOTSPACE",
+      "sample_value": "allow-dns",
+      "bytes": [
+        189,
+        198
+      ],
+      "mapped_to": "unmapped.policy_name"
+    },
+    {
+      "name": "src_zone",
+      "grok": "WORD",
+      "sample_value": "trust",
+      "bytes": [
+        199,
+        204
+      ],
+      "mapped_to": "unmapped.src_zone"
+    }
+  ],
+  "ues_targets": [
+    "time",
+    "device.hostname",
+    "metadata.event_code",
+    "src_endpoint.ip",
+    "src_endpoint.port",
+    "dst_endpoint.ip",
+    "dst_endpoint.port",
+    "connection_info.protocol_num",
+    "disposition",
+    "unmapped.service",
+    "unmapped.nat_src_ip",
+    "unmapped.policy_name",
+    "unmapped.src_zone",
+    "(ignore)"
+  ]
+}
