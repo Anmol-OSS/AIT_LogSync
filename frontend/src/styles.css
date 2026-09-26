@@ -169,3 +169,23 @@ textarea { width: 100%; font-family: var(--mono); font-size: 13px; }
 .filters { display: flex; gap: 6px; margin-top: 14px; flex-wrap: wrap; }
 .chip { padding: 4px 12px; border-radius: 999px; background: var(--panel); color: var(--text); border: 1px solid var(--border); font-weight: 500; }
 .chip.active { background: var(--accent-soft); color: var(--accent); border-color: var(--accent); }
+
+/* dashboard chart - status palette is fixed across modes (always paired with labels) */
+:root { --st-good: #0ca30c; --st-warn: #fab219; --st-crit: #d03b3b; }
+.grid-2 { display: grid; grid-template-columns: 3fr 2fr; gap: 18px; }
+.grid-2 > .card { margin-top: 18px; }
+@media (max-width: 1000px) { .grid-2 { grid-template-columns: 1fr; } }
+.timeline { position: relative; }
+.timeline svg { width: 100%; height: 170px; display: block; }
+.timeline .grid { stroke: var(--border); stroke-width: 1; }
+.timeline .baseline { stroke: var(--muted); stroke-width: 1; }
+.timeline .axis { fill: var(--muted); font-size: 11px; }
+.legend { display: flex; gap: 14px; font-size: 12.5px; color: var(--muted); margin-bottom: 6px; }
+.legend i, .tooltip i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 5px; vertical-align: -1px; }
+.tooltip {
+  position: absolute; top: 24px; transform: translateX(-50%); pointer-events: none;
+  background: var(--panel); border: 1px solid var(--border); border-radius: 6px; padding: 6px 10px;
+  font-size: 12.5px; box-shadow: 0 4px 12px rgba(0,0,0,.25); white-space: nowrap; color: var(--text);
+}
+.evidence.compact { grid-template-columns: 130px 1fr; font-size: 13.5px; }
+.drift { margin: 6px 0; }

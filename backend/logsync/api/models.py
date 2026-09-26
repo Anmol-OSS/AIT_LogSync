@@ -113,11 +113,28 @@ class DriftSignal(Model):
     detail: str
 
 
+class TimelinePoint(Model):
+    t: int                 # unix second
+    accepted: int
+    blocked: int
+    unparsed: int
+
+
+class TreeHeadInfo(Model):
+    tree_size: int
+    root: str
+    signed_at: str
+    signature: str
+    rfc3161_time: str | None
+
+
 class DashboardSummary(Model):
     window: str
     totals: Totals
     sources: list[SourceStats]
     drift: list[DriftSignal]
+    timeline: list[TimelinePoint] = []
+    tree_head: TreeHeadInfo | None = None
 
 
 class DraftField(Model):

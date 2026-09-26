@@ -30,6 +30,7 @@ class LiveService:
         self.publish = publish          # callable(RawEvent) - HTTP ingest goes through the same bus
         self.synth = synth              # parser synthesis loop (M5d)
         self._stamper = None
+        self._stamp_cache: dict[int, str] = {}   # tree size -> RFC 3161 time (avoid re-parsing tokens)
         self._lock = threading.Lock()
 
     # ---------------------------------------------------------------- helpers
@@ -90,7 +91,25 @@ class LiveService:
             drift.append(m.DriftSignal(source=r["pack"], signal="blocked by gate",
                                        detail="%d events from %s had bytes or values the pack could not explain "
                                               "- possible firmware format change" % (r["n"], r["pack"])))
+        # events per second, by status, for the last 60 seconds
+        start = int(now) - 59
+        buckets = {t: {"accepted": 0, "blocked": 0, "unparsed": 0} for t in range(start, int(now) + 1)}
+        for r in c.execute("SELECT CAST(created AS INTEGER) t, status, COUNT(*) n FROM events "
+                           "WHERE created >= ? GROUP BY t, status", (start,)):
+            if r["t"] in buckets and r["status"] in buckets[r["t"]]:
+                buckets[r["t"]][r["status"]] = r["n"]
+        timeline = [m.TimelinePoint(t=t, **v) for t, v in buckets.items()]
+
+        head = self.evidence.latest_head()
+        tree_head = None
+        if head:
+            if head.tree_size not in self._stamp_cache and head.rfc3161:
+                self._stamp_cache = {head.tree_size: self.evidence.tsa.describe(head.rfc3161)}
+            tree_head = m.TreeHeadInfo(tree_size=head.tree_size, root=head.root, signed_at=head.timestamp,
+                                       signature=head.signature[:32] + "…",
+                                       rfc3161_time=self._stamp_cache.get(head.tree_size))
         return m.DashboardSummary(
+            timeline=timeline, tree_head=tree_head,
             window="since start · events/sec over the last 10 s",
             totals=m.Totals(received=total, archived=total, normalized=accepted, blocked=blocked,
                             dead_letter=unparsed, eps=recent / 10.0,

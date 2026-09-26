@@ -75,6 +75,23 @@ export interface DashboardSummary {
   };
   sources: SourceStats[];
   drift: { source: string; signal: string; detail: string }[];
+  timeline: TimelinePoint[]; // events per second by status, last 60 s
+  tree_head: TreeHead | null; // latest signed Merkle tree head
+}
+
+export interface TimelinePoint {
+  t: number; // unix second
+  accepted: number;
+  blocked: number;
+  unparsed: number;
+}
+
+export interface TreeHead {
+  tree_size: number;
+  root: string;
+  signed_at: string;
+  signature: string;
+  rfc3161_time: string | null;
 }
 
 export interface PackInfo {
