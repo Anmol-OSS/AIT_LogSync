@@ -52,9 +52,13 @@ class EvidenceStore:
     # ---------------------------------------------------------------- write path
     def record(self, event_id: str, received_at: str, raw: bytes) -> tuple[str, str, int]:
         """Archive raw bytes and append the event's leaf. Returns (sha256, ref, leaf_index)."""
-        sha, ref = self.archive.put(raw)
-        index = self.log.append(leaf_hash(leaf_input(event_id, received_at, raw)))
-        return sha, ref, index
+        return self.record_many([(event_id, received_at, raw)])[0]
+
+    def record_many(self, items: list[tuple[str, str, bytes]]) -> list[tuple[str, str, int]]:
+        """Batch version: archive every raw line, then append all leaves with one fsync."""
+        stored = self.archive.put_many([raw for _, _, raw in items])
+        indexes = self.log.append_many([leaf_hash(leaf_input(e, t, raw)) for e, t, raw in items])
+        return [(sha, ref, idx) for (sha, ref), idx in zip(stored, indexes)]
 
     def maybe_seal(self, force: bool = False) -> TreeHead | None:
         """Sign a new tree head if enough leaves or time have accumulated."""

@@ -7,7 +7,7 @@ declared transform fails the event is blocked, never silently half-normalized.
 from dataclasses import dataclass
 
 from . import transforms
-from .pack import KIND_DECODE, Pack
+from .pack import Pack, unmapped_chain
 from .tokenize import TokenResult
 
 
@@ -42,28 +42,27 @@ def normalize(pack: Pack, tok: TokenResult, raw: bytes, ctx: transforms.Context)
     provenance: list[dict] = []
     used: set[str] = set()
 
-    def entry(target, name, s, e, kind, steps):
-        chain = KIND_DECODE.get(kind, []) + list(steps)
+    def entry(target, s, e, chain):
         try:
             text = raw[s:e].decode("utf-8")
         except UnicodeDecodeError:
             raise transforms.TransformError("bytes[%d:%d] are not valid UTF-8" % (s, e))
-        value = transforms.apply(chain, text, ctx)
+        value = chain.run(text, ctx)
         _set(ues, target, value)
         provenance.append({"field": target, "value": value, "raw": text, "bytes": [s, e],
-                           "transforms": ["utf8_decode"] + [transforms.describe(st) for st in chain]})
+                           "transforms": chain.labels})
 
     try:
         for fm in pack.maps:
             for src in fm.sources:
                 hit = by_name.get(src)
                 if hit and hit[1] > hit[0]:
-                    entry(fm.target, src, *hit, fm.steps)
+                    entry(fm.target, hit[0], hit[1], fm.chain(hit[2]))
                     used.add(src)
                     break
         for name, s, e, kind in fields:
             if name not in used and e > s:
-                entry("unmapped." + name.replace(".", "_"), name, s, e, kind, [])
+                entry("unmapped." + name.replace(".", "_"), s, e, unmapped_chain(kind))
     except transforms.TransformError as err:
         return Normalized(None, [], str(err))
 

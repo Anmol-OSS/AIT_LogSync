@@ -36,6 +36,24 @@ class FieldMap:
     target: str
     sources: list[str]
     steps: list
+    chains: dict = field(default_factory=dict)   # tokenizer kind -> compiled Chain
+
+    def chain(self, kind: int) -> "transforms.Chain":
+        c = self.chains.get(kind)
+        if c is None:
+            c = self.chains[kind] = transforms.Chain(KIND_DECODE.get(kind, []) + list(self.steps))
+        return c
+
+
+_UNMAPPED: dict[int, "transforms.Chain"] = {}
+
+
+def unmapped_chain(kind: int) -> "transforms.Chain":
+    """Unmapped fields only undo their wire encoding (JSON / CSV / CEF escapes)."""
+    c = _UNMAPPED.get(kind)
+    if c is None:
+        c = _UNMAPPED[kind] = transforms.Chain(KIND_DECODE.get(kind, []))
+    return c
 
 
 @dataclass

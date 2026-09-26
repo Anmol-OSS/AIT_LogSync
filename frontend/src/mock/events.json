@@ -175,7 +175,7 @@
         "52247fb04f3ad0b44c89748e126971358fe884a7f408c2bf649c0209a29db450",
         "2d3eb3f616f882c67e146edf63f44f2d64f798ff9e6d4f63643498c5cbe51bd2"
       ],
-      "status": "verified"
+      "status": "sealed"
     }
   },
   {
@@ -361,7 +361,7 @@
         "df067f0305e48a0c4d5b7c7ad11b546bd9470bde9ca7df111e214a33398cb641",
         "2983bd07f89c3cef58c90794b2a94f8a6d027090a3cdb5de8566ef7789797709"
       ],
-      "status": "verified"
+      "status": "sealed"
     }
   },
   {
@@ -537,7 +537,7 @@
         "f332f460b9e66eb600ddc328e2d6c9abdbbf346c5e1ccf1eb4c3a2d876ea1164",
         "ad431b407aa9e1d4a5dcd93a4170089f655b212df1c93c72b60a14c404869474"
       ],
-      "status": "verified"
+      "status": "sealed"
     }
   },
   {
@@ -726,7 +726,7 @@
         "2860c24ce59b9e7ccd071ed983b499c467cf33d657b37cb61986dc0640987357",
         "d68b581fcbb6f29d9815442eed87cb1ff47dbc527dd28232764b9cf448d35428"
       ],
-      "status": "verified"
+      "status": "sealed"
     }
   },
   {
@@ -932,7 +932,7 @@
         "766b4e0c62bbc6253057f28e2782626f6caaf017a581377e563dedf3e9890ab5",
         "d93baca1b8879080e6e68f67145eadbc5a1f0341823f7991f37791fe4213dd35"
       ],
-      "status": "verified"
+      "status": "sealed"
     }
   },
   {
@@ -980,7 +980,7 @@
         "8e57f069346392bee79480b45d70b6268d511196aae273940e7105c5ec390d78",
         "1538be83d0c132a24ca7e303fc47361b8da29a7feec9f0b4d93a1f688e0cfac5"
       ],
-      "status": "verified"
+      "status": "sealed"
     }
   }
 ]

@@ -33,7 +33,7 @@ export interface ProofCarryingEvent {
     tree_size: number;
     root: string;
     inclusion_proof: string[];
-    status: "verified" | "failed";
+    status: "sealed" | "pending"; // covered by a signed tree head yet? (Verify checks the proof)
   };
 }
 

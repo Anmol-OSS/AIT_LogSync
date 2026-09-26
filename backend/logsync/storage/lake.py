@@ -89,6 +89,12 @@ class LakeWriter:
         if due:
             self.flush()
 
+    def flush_if_due(self) -> None:
+        with self._lock:
+            due = bool(self._rows) and time.monotonic() - self._last >= self.flush_seconds
+        if due:
+            self.flush()
+
     def flush(self) -> Path | None:
         with self._lock:
             rows, self._rows = self._rows, []

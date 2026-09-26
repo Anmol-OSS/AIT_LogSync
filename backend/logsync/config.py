@@ -14,7 +14,7 @@ class Settings:
     packs_dir: Path = field(default_factory=lambda: Path(_env(
         "LOGSYNC_PACKS", str(Path(__file__).resolve().parents[2] / "packs"))))
     # Signed tree head cadence: seal after this many new leaves or seconds.
-    sth_every_leaves: int = field(default_factory=lambda: int(_env("LOGSYNC_STH_LEAVES", "500")))
+    sth_every_leaves: int = field(default_factory=lambda: int(_env("LOGSYNC_STH_LEAVES", "5000")))
     sth_every_seconds: float = field(default_factory=lambda: float(_env("LOGSYNC_STH_SECONDS", "2")))
     segment_max_bytes: int = field(default_factory=lambda: int(_env("LOGSYNC_SEGMENT_BYTES", str(4 * 1024 * 1024))))
     # Timezone assumed for syslog timestamps that carry none (RFC 3164). CERT-In

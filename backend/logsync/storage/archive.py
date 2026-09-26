@@ -35,20 +35,37 @@ class Archive:
     # ---------------------------------------------------------------- write
     def put(self, data: bytes) -> tuple[str, str]:
         """Store bytes; returns (sha256 hex, ref). Identical bytes are stored once."""
-        sha = hashlib.sha256(data).hexdigest()
+        return self.put_many([data])[0]
+
+    def put_many(self, items: list[bytes]) -> list[tuple[str, str]]:
+        """Batch version: one file append for all new objects."""
         conn = self.db.connect()
-        row = conn.execute("SELECT ref FROM objects WHERE sha256 = ?", (sha,)).fetchone()
-        if row:
-            return sha, row["ref"]
+        out: list[tuple[str, str]] = []
+        pending: dict[str, str] = {}     # sha -> ref, for duplicates inside this batch
+        rows = []
         path = self._path(self._active, sealed=False)
         with open(path, "ab") as f:
             offset = f.tell()
-            f.write(data)
-        ref = "%s:%d:%d" % (self._active, offset, len(data))
-        conn.execute("INSERT INTO objects (sha256, ref, length) VALUES (?, ?, ?)", (sha, ref, len(data)))
-        if offset + len(data) >= self.segment_max:
+            chunks = []
+            for data in items:
+                sha = hashlib.sha256(data).hexdigest()
+                ref = pending.get(sha)
+                if ref is None:
+                    row = conn.execute("SELECT ref FROM objects WHERE sha256 = ?", (sha,)).fetchone()
+                    if row:
+                        ref = row["ref"]
+                    else:
+                        ref = "%s:%d:%d" % (self._active, offset, len(data))
+                        chunks.append(data)
+                        rows.append((sha, ref, len(data)))
+                        offset += len(data)
+                    pending[sha] = ref
+                out.append((sha, ref))
+            f.write(b"".join(chunks))
+        conn.executemany("INSERT INTO objects (sha256, ref, length) VALUES (?, ?, ?)", rows)
+        if offset >= self.segment_max:
             self.seal_active()
-        return sha, ref
+        return out
 
     def seal_active(self) -> None:
         path = self._path(self._active, sealed=False)

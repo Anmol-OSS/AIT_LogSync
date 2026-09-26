@@ -181,11 +181,22 @@ def describe(step) -> str:
     return "%s(%s)" % (name, arg)
 
 
+class Chain:
+    """A transform list parsed once (at pack load), applied many times."""
+
+    def __init__(self, steps: list):
+        parsed = [parse_step(s) for s in steps]
+        self.calls = [(REGISTRY[name], arg) for name, arg in parsed]
+        self.labels = ["utf8_decode"] + [describe(s) for s in steps]
+
+    def run(self, text: str, ctx: Context):
+        value = text
+        for fn, arg in self.calls:
+            value = fn(value, arg, ctx)
+        if isinstance(value, datetime):
+            value = value.isoformat()
+        return value
+
+
 def apply(steps: list, text: str, ctx: Context):
-    value = text
-    for step in steps:
-        name, arg = parse_step(step)
-        value = REGISTRY[name](value, arg, ctx)
-    if isinstance(value, datetime):
-        value = value.isoformat()
-    return value
+    return Chain(steps).run(text, ctx)

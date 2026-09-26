@@ -130,9 +130,15 @@ class MerkleLog(MerkleTree):
         self._offset += usable
 
     def append(self, lh: bytes) -> int:
+        return self.append_many([lh])[0]
+
+    def append_many(self, hashes: list[bytes]) -> list[int]:
+        """Append a batch of leaves with a single fsync."""
+        if not hashes:
+            return []
         with open(self.path, "ab") as f:
-            f.write(lh)
+            f.write(b"".join(hashes))
             f.flush()
             os.fsync(f.fileno())
-        self._offset += HASH_LEN
-        return super().append(lh)
+        self._offset += HASH_LEN * len(hashes)
+        return [super(MerkleLog, self).append(h) for h in hashes]

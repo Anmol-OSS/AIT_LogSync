@@ -56,7 +56,7 @@ class MerkleInfo(Model):
     tree_size: int
     root: str
     inclusion_proof: list[str]
-    status: Literal["verified", "failed"]
+    status: Literal["sealed", "pending"]   # covered by a signed tree head yet? (verify checks the proof)
 
 
 class ProofCarryingEvent(Model):
