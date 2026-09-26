@@ -8,9 +8,22 @@ version = "0.1.0"
 description = "LogSync ULPF - Universal Log Pre-processing Framework (SIH 2026, PS 26156)"
 requires-python = ">=3.12,<3.13"
 license = { text = "Apache-2.0" }
+dependencies = [
+    "fastapi>=0.141",
+    "uvicorn[standard]>=0.54",
+    "pydantic>=2.13",
+    "pyyaml>=6.0",
+    "cryptography>=50.0",
+    "pyarrow>=25.0",
+    "wasmtime",
+]
 
 [project.optional-dependencies]
-dev = ["pytest"]
+dev = ["pytest", "httpx2"]
+kafka = ["confluent-kafka>=2.15"]
+
+[project.scripts]
+logsync = "logsync.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["backend"]
