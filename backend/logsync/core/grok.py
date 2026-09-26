@@ -32,6 +32,8 @@ PATTERNS = {
     "TIMESTAMP_ISO8601": r"\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:?\d{2})?",
     "SYSLOGPRI": r"<\d{1,3}>",
     "UUID": r"[0-9A-Fa-f]{8}-(?:[0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}",
+    # a run of characters up to the next space or punctuation (used by the drafter)
+    "TOKEN": r'[^\s/:,=()\[\]"<>|]+',
 }
 
 _TOKEN = re.compile(r"%\{([A-Z0-9_]+)(?::([A-Za-z_][A-Za-z0-9_]*))?\}")

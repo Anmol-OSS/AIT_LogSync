@@ -26,6 +26,8 @@ def create_app(service: Service | None = None, static_dir: Path | None = None) -
             return fn(*args)
         except NotFound as e:
             raise HTTPException(404, f"not found: {e}")
+        except ValueError as e:          # e.g. a pack rejected by the validation gate
+            raise HTTPException(422, str(e))
 
     @api.get("/health")
     def health():
@@ -69,7 +71,7 @@ def create_app(service: Service | None = None, static_dir: Path | None = None) -
         lines = [ln for ln in req.sample if ln.strip()]
         if not lines:
             raise HTTPException(422, "sample must contain at least one non-empty line")
-        return svc.draft_pack(lines)
+        return found(svc.draft_pack, lines)
 
     @api.post("/packs/approve", response_model=m.ApproveResult)
     def approve_pack(req: m.ApproveRequest):
