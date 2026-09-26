@@ -1,0 +1,23 @@
+[package]
+name = "logsync-runtime"
+version = "0.1.0"
+edition = "2021"
+description = "LogSync pack tokenizer, compiled to WebAssembly and run inside a Wasmtime sandbox"
+license = "Apache-2.0"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+# Unicode tables are not needed: patterns run in byte mode with ASCII classes,
+# matching Python's bytes-regex semantics in the reference tokenizer.
+# No serde: nothing here needs a host-side build script, so the module builds
+# with Rust's bundled wasm linker alone (no C toolchain required).
+regex = { version = "1", default-features = false, features = ["std", "perf"] }
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true

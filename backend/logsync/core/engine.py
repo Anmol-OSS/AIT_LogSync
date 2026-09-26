@@ -13,6 +13,7 @@ class Engine(Protocol):
     name: str
 
     def tokenize(self, spec: dict, raw: bytes) -> TokenResult: ...
+    def tokenize_many(self, spec: dict, raws: list[bytes]) -> list[TokenResult]: ...
 
 
 class PythonEngine:
@@ -20,6 +21,9 @@ class PythonEngine:
 
     def tokenize(self, spec: dict, raw: bytes) -> TokenResult:
         return tokenize(spec, raw)
+
+    def tokenize_many(self, spec: dict, raws: list[bytes]) -> list[TokenResult]:
+        return [tokenize(spec, r) for r in raws]
 
 
 def make_engine(kind: str) -> Engine:

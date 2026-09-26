@@ -30,3 +30,6 @@ where = ["backend"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[tool.setuptools.package-data]
+logsync = ["core/wasm/*.wasm"]
