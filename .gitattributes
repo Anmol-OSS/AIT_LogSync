@@ -1,4 +1,8 @@
-* text=auto
+# Keep LF everywhere, including Windows checkouts: shell scripts copied into
+# Linux containers break with CRLF.
+* text=auto eol=lf
+*.png binary
+*.wasm binary
 
 # Sample logs are evidence: byte provenance depends on every byte staying
 # exactly as generated, so git must never convert their line endings.
