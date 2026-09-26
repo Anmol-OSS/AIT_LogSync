@@ -77,6 +77,16 @@ export interface DashboardSummary {
   drift: { source: string; signal: string; detail: string }[];
 }
 
+export interface PackInfo {
+  pack_id: string;
+  version: string;
+  vendor: string;
+  product: string;
+  format: string;
+  digest: string;
+  signed: boolean;
+}
+
 export interface DraftField {
   name: string;
   grok: string;

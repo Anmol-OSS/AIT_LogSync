@@ -1,5 +1,6 @@
 import { NavLink, Route, Routes } from "react-router";
-import { USING_MOCK_DATA } from "./api";
+import { getHealth } from "./api";
+import { useAsync } from "./lib/useAsync";
 import { Dashboard } from "./pages/Dashboard";
 import { Events } from "./pages/Events";
 import { PackEditor } from "./pages/PackEditor";
@@ -13,6 +14,8 @@ const NAV = [
 ];
 
 export function App() {
+  const health = useAsync(getHealth, [], 5000);
+  const up = health.data?.status === "ok" && !health.error;
   return (
     <div className="shell">
       <aside className="sidebar">
@@ -23,7 +26,10 @@ export function App() {
             <NavLink key={n.to} to={n.to} end={n.to === "/"}>{n.label}</NavLink>
           ))}
         </nav>
-        {USING_MOCK_DATA && <div className="mock-badge" title="Screens use mock data until the backend is connected (M6)">MOCK DATA</div>}
+        <div className={`backend-badge ${up ? "up" : "down"}`}
+             title={up ? `API ${health.data?.version}` : "Start the backend: logsync serve"}>
+          <span className="dot" /> {up ? "backend live" : "backend offline"}
+        </div>
       </aside>
       <main className="content">
         <Routes>

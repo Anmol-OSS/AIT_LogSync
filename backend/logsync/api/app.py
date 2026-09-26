@@ -1,6 +1,6 @@
 """FastAPI application: REST API for the UI, SIEM integrations and auditors.
 
-    uvicorn logsync.api.app:app --port 8000        (docs at /docs)
+Started by `logsync serve` or `logsync api` (interactive docs at /docs).
 """
 import os
 from pathlib import Path
@@ -11,11 +11,11 @@ from fastapi.staticfiles import StaticFiles
 
 from .. import __version__
 from . import models as m
-from .service import FixtureService, NotFound, Service
+from .service import NotFound, Service
 
 
-def create_app(service: Service | None = None, static_dir: Path | None = None) -> FastAPI:
-    svc: Service = service or FixtureService()
+def create_app(service: Service, static_dir: Path | None = None) -> FastAPI:
+    svc = service
     app = FastAPI(title="LogSync ULPF", version=__version__,
                   description="Universal Log Pre-processing Framework - proof-carrying telemetry API")
     api = APIRouter(prefix="/api")
@@ -93,5 +93,3 @@ def create_app(service: Service | None = None, static_dir: Path | None = None) -
 
     return app
 
-
-app = create_app()
